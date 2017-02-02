@@ -53,31 +53,39 @@ class BaseMap extends Component {
     mapboxgl.accessToken = ACCESS_TOKEN;
     const map = new mapboxgl.Map({
       container: 'mapId',
-      style: 'mapbox://styles/walker808/ciyn7e4fs007p2smg8m4vht1f',
+      // style: 'mapbox://styles/walker808/ciyn7e4fs007p2smg8m4vht1f',
+      style: 'mapbox://styles/mapbox/satellite-v9',
       center: [-71.0589,42.3601], // starting position
       zoom: 9 // starting zoom
     })
     // this.populateMap();
     // console.log("Map: ", this.props,baseMap);
     console.log("rendering map data", this.props);
-    const mapData = this.props;
+    const mapData = this.props.baseMap;
         map.on('load', function () {
         // this.populateMap();
-        map.addLayer({
-            "id": "points",
-            "type": "symbol",
-            "source": {
-                "type": "geojson",
-                "data": mapData.baseMap
-            },
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-            }
-        });
+        console.log('MapData', mapData)
+        _.forIn(mapData, function(value,key){
+          console.log("Key of layer", key);
+          console.log("Value of layer: ", value);
+          map.addLayer(value);
+        })
+
+        // map.addLayer({
+        //     "id": "points",
+        //     "type": "symbol",
+        //     "source": {
+        //         "type": "geojson",
+        //         "data": mapData.baseMap
+        //     },
+        //     "layout": {
+        //         "icon-image": "{icon}-15",
+        //         "text-field": "{title}",
+        //         "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        //         "text-offset": [0, 0.6],
+        //         "text-anchor": "top"
+        //     }
+        // });
     });
     // .setView([40, -74.50], 9);
   };

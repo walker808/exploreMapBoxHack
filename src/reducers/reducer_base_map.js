@@ -114,13 +114,13 @@ export default function(state = initialState, action){
   // add it to the new item being returned, do not modify it.
   switch (action.type){
     case 'FETCH_MAP_DATA':
-    console.log("Retrieved action: ", action.type);
-    console.log("Payload", action.payload.data);
-    console.log("Result",JSON.stringify(action.payload.data));
+    // console.log("Retrieved action: ", action.type);
+    // console.log("Payload", action.payload.data);
+    // console.log("Result",JSON.stringify(action.payload.data));
     const layerCollection = [];
     _.forIn(action.payload.data, function(value, key){
-      console.log("Value:", value);
-      let category = 'harbor';
+      // console.log("Value:", value);
+      let category = 'harbor';  //This needs to be set to the 'Key', currently set to 'harbor' for the icon
       // Key is the category
       // Value is the object of each merchant with their name, lat, lng.
       const merchants = [];
@@ -131,10 +131,26 @@ export default function(state = initialState, action){
         // return {"Merchant Name": key};
       });
       console.log("Merchants", merchants);
-      layerCollection.push({
-        type: "FeatureCollection",
-        features: merchants
-      });
+      layerCollection.push(
+        {
+            "id": key,
+            "type": "symbol",
+            "source": {
+                "type": "geojson",
+                "data": {
+                type: "FeatureCollection",
+                features: merchants
+              }
+            },
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+            }
+        }
+        );
       console.log("Key: ", key);
     })
     console.log("layerCollection", layerCollection);
@@ -151,7 +167,8 @@ export default function(state = initialState, action){
     // })
       // return state.concat([action.payload.data]); //Below line is nearly identical using ES6 syntax
       // return action.payload.data; // [ city, city, city] NOT [city, [city, city]]
-      return layerCollection[1];
+      console.log(layerCollection);
+      return layerCollection;
   }
   console.log("Returning default");
   return state;
