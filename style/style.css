@@ -4,6 +4,7 @@
 
 .mapboxgl-popup-content{
   background-color: blue;
+  width:100px;
 }
 .popup{
   background-color: blue;

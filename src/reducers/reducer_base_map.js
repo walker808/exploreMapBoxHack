@@ -121,8 +121,9 @@ export default function(state = initialState, action){
     // console.log("Result",JSON.stringify(action.payload.data));
     const layerCollection = [];
     _.forIn(action.payload.data, function(value, key){
-      // console.log("Value:", value);
-      let category = 'harbor';  //This needs to be set to the 'Key', currently set to 'harbor' for the icon
+      console.log("Value:", value);
+      console.log("KEYEYEYEYEYE", key);
+      let category = key;  //This needs to be set to the 'Key', currently set to 'harbor' for the icon
       // Key is the category
       // Value is the object of each merchant with their name, lat, lng.
       const merchants = [];

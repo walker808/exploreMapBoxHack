@@ -12,7 +12,7 @@ const PERSONAL = '/customers';
 
 export function fetchMapData() {
   // const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
-  const request = axios.post(`${ROOT_URL}${PERSONAL}`, {
+  const request = axios.post(`${ROOT_URL}${MERCHANTS}`, {
     "latitude":"42.3572855",
     "longitude": "-71.0534591"
   });
@@ -24,7 +24,7 @@ export function fetchMapData() {
 };
 
 export function createMapPopUp(map, clickEvent) {
-  var features = map.queryRenderedFeatures(clickEvent.point, { layers: ['eat','out','shop'] });
+  var features = map.queryRenderedFeatures(clickEvent.point, { layers: ['fast-food','bar','shop'] });
   if (!features.length) {
     // return;
     return {
