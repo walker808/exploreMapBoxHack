@@ -84,7 +84,7 @@ class BaseMap extends Component {
       container: 'mapId',
       style: 'mapbox://styles/walker808/ciyn7e4fs007p2smg8m4vht1f',
       center: [-71.0589,42.3601], // starting position
-      zoom: 9 // starting zoom
+      zoom: 13 // starting zoom
     })
     console.log('thismap:',this.props.mapReference.map);
     // const map = new mapboxgl.Map({
