@@ -90,7 +90,8 @@ const combineFeature = function(merchantName, properties, category) {
       },
       "properties": {
         "title": merchantName,
-        "icon": category
+        "icon": category,
+        "avgBill": properties.avgBill
       }
     };
     console.log("Returning result: " + JSON.stringify(result));
@@ -113,6 +114,7 @@ export default function(state = initialState, action){
   // Always make sure we return a new state, never modify the existing state. If need to maintain previous state
   // add it to the new item being returned, do not modify it.
   switch (action.type){
+
     case 'FETCH_MAP_DATA':
     // console.log("Retrieved action: ", action.type);
     // console.log("Payload", action.payload.data);
@@ -125,9 +127,9 @@ export default function(state = initialState, action){
       // Value is the object of each merchant with their name, lat, lng.
       const merchants = [];
        _.forIn(value, function(value,key){
-        console.log("Merchant name: ", key);
+        console.log("Merchant ID: ", key);
         console.log("Lat,Lng: ", value.lat, value.lng);
-        merchants.push(combineFeature(key,value,category));
+        merchants.push(combineFeature(value.merchantName,value,category));
         // return {"Merchant Name": key};
       });
       console.log("Merchants", merchants);

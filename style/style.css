@@ -1,3 +1,12 @@
 #mapId {
   height:500px;
 }
+
+.mapboxgl-popup-content{
+  background-color: blue;
+}
+.popup{
+  background-color: blue;
+  height:50px;
+  width:50px;
+}
